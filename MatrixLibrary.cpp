@@ -1,25 +1,25 @@
-#include "matrixOperation.h"
+#include "MatrixLibrary.h"
 
-float module(float a, float b, float c)
+float MatrixLibrary::module(float a, float b, float c)
 {
   return sqrt(pow(a, 2) + pow(b, 2) + pow(c, 2));
 }
 
-void vetorial(float *vector1, float *vector2, float *vectorReturn)
+void MatrixLibrary::vetorial(float *vector1, float *vector2, float *vectorReturn)
 {
   vectorReturn[0] = vector1[1] * vector2[2] - vector1[2] * vector2[1];
   vectorReturn[1] = vector1[2] * vector2[0] - vector1[0] * vector2[2];
   vectorReturn[2] = vector1[0] * vector2[1] - vector1[1] * vector2[0];
 }
 
-void calculate_zc(float *vector, float *vectorReturn)
+void MatrixLibrary::calculate_zc(float *vector, float *vectorReturn)
 {
   vectorReturn[0] = -1 * vector[0] / module(vector[0], vector[1], vector[2]);
   vectorReturn[1] = -1 * vector[1] / module(vector[0], vector[1], vector[2]);
   vectorReturn[2] = -1 * vector[2] / module(vector[0], vector[1], vector[2]);
 }
 
-void calculate_xc(float *vector1, float *vector2, float *vectorReturn)
+void MatrixLibrary::calculate_xc(float *vector1, float *vector2, float *vectorReturn)
 {
   float v[3];
 
@@ -30,7 +30,7 @@ void calculate_xc(float *vector1, float *vector2, float *vectorReturn)
   vectorReturn[2] = v[2] / module(v[0], v[1], v[2]);
 }
 
-void create_matrix_bt(float *vector1, float *vector2, float *b_t)
+void MatrixLibrary::create_matrix_bt(float *vector1, float *vector2, float *b_t)
 {
   float zc[3], xc[3], yc[3];
 
@@ -46,21 +46,4 @@ void create_matrix_bt(float *vector1, float *vector2, float *b_t)
   int l;
   for (l = 0; l < 16; l++)
     b_t[l] = bt[l];
-}
-
-void calculateMatrix(float *m1, float *m2, float **matrix_view)
-{
-  float m[16];
-  int i, j;
-  for (i = 0, j = 0; j < 16; j++)
-  {
-    m[j] = m1[i] * m2[3 * i] + m1[i + 1] * m2[4 + 4 * i] + m1[i + 2] * m2[7 + 4 * i] + m1[i + 3] * m2[11 + 4 * i];
-    cout << m1[i] << " " << m2[3 * i] << " " << m1[i + 1] << " " << m2[4 + 4 * i] << " " << m1[i + 2] << " " << m2[7 + 4 * i] << " " << m1[i + 3] << " " << m2[11 + 4 * i];
-    cout << m[j] << " ";
-    if (j % 4 == 0)
-    {
-      cout << endl;
-      i++;
-    }
-  }
 }

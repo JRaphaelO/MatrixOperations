@@ -1,25 +1,25 @@
 #include "MatrixLibrary.h"
 
-float MatrixLibrary::module(float a, float b, float c)
+float module(float a, float b, float c)
 {
   return sqrt(pow(a, 2) + pow(b, 2) + pow(c, 2));
 }
 
-void MatrixLibrary::vetorial(float *vector1, float *vector2, float *vectorReturn)
+void vetorial(float *vector1, float *vector2, float *vectorReturn)
 {
   vectorReturn[0] = vector1[1] * vector2[2] - vector1[2] * vector2[1];
   vectorReturn[1] = vector1[2] * vector2[0] - vector1[0] * vector2[2];
   vectorReturn[2] = vector1[0] * vector2[1] - vector1[1] * vector2[0];
 }
 
-void MatrixLibrary::calculate_zc(float *vector, float *vectorReturn)
+void calculate_zc(float *vector, float *vectorReturn)
 {
   vectorReturn[0] = -1 * vector[0] / module(vector[0], vector[1], vector[2]);
   vectorReturn[1] = -1 * vector[1] / module(vector[0], vector[1], vector[2]);
   vectorReturn[2] = -1 * vector[2] / module(vector[0], vector[1], vector[2]);
 }
 
-void MatrixLibrary::calculate_xc(float *vector1, float *vector2, float *vectorReturn)
+void calculate_xc(float *vector1, float *vector2, float *vectorReturn)
 {
   float v[3];
 
@@ -30,7 +30,7 @@ void MatrixLibrary::calculate_xc(float *vector1, float *vector2, float *vectorRe
   vectorReturn[2] = v[2] / module(v[0], v[1], v[2]);
 }
 
-void MatrixLibrary::create_matrix_bt(float *vector1, float *vector2, float *b_t)
+void create_matrix_bt(float *vector1, float *vector2, float *b_t)
 {
   float zc[3], xc[3], yc[3];
 
